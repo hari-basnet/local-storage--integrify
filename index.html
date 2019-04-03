@@ -14,7 +14,7 @@
         <div class="wrapper">
             <div class="section-input">
                 <input type="text" id="description" placeholder="description">
-                <input type="text" id="amount" placeholder="amount">
+                <input type="number" id="amount" placeholder="amount">
                 <select id="selection" name="select" onchange="checkSelection()">
                     <option value="select">---Select---</option>
                     <option value="income">Income</option>
@@ -25,9 +25,11 @@
             <div class="transaction-section">
                 <div class="income-box">
                     <h2>Incomes</h2><hr>
+                    <div class="income-data"></div>
                 </div>
                 <div class="expense-box">
                     <h2>Expenses</h2><hr>
+                    <div class="expense-data"></div>
                 </div>
             </div>
             <h2>Balance</h2>
