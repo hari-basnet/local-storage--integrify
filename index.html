@@ -12,9 +12,9 @@
     <main>
         <h1>Account Balance</h1>
         <div class="wrapper">
-            <div class="input-section">
-                <input type="text" class="description">
-                <input type="text" class="amount">
+            <div class="section-input">
+                <input type="text" id="description" placeholder="description">
+                <input type="text" id="amount" placeholder="amount">
                 <select name="" id="" >
                     <option value="">Select</option>
                     <option value="">Income</option>
@@ -22,11 +22,16 @@
                 </select>
                 <button class="btn-add">Add</button>
             </div>
-            <div class="income-expense">
-                <div class="income"></div>
-                <div class="expense"></div>
+            <div class="transaction-section">
+                <div class="income-box">
+                    <h2>Incomes</h2><hr>
+                </div>
+                <div class="expense-box">
+                    <h2>Expenses</h2><hr>
+                </div>
             </div>
-            <div class="">
+            <h2>Balance</h2>
+            <div class="section-balance">
                 
             </div>
         </div>
