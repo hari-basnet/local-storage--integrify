@@ -6,53 +6,87 @@ const select = document.querySelector('#selection');
 const incomeData = document.querySelector('.income-data');
 const expenseData = document.querySelector('.expense-data');
 const addButton = document.querySelector('.btn-add');
-const incomeArray = []
-const expenseArray = []
+
 let isValidated = false;
 
 
-function checkSelection() {
+// creating object to store in the local storage
+const accountBalance = {
+    name: 'Hari',
+    incomes: {
+        description: ['salary', 'sales', 'company revenue'],
+        amount: [20000, 3000, 1000]
+    },
 
-}
+    expenses: {
+        description: ['rent', 'carinsurance'],
+        amount: [800, 1200]
+    }
+
+};
+
 
 function createContent() {
 
 
     let selectedValue = select.options[select.selectedIndex].value;
-    console.log(select.options);
+
+    let showAccount = JSON.parse(localStorage.getItem('accountBalance'));
+    console.log(showAccount);
+
 
     if (selectedValue == 'income') {
-        incomeData.innerHTML += `<div>
-        <span>${itemDescription.value}</span>
-        <span>${itemAmount.value}€</span>
-        </div>`;
+
+        incomeData.innerHTML = '';
+        accountBalance.incomes.description.push(itemDescription.value);
+        accountBalance.incomes.amount.push(parseInt(itemAmount.value));
+
+
+        showAccount.incomes.amount.forEach(element => {
+            incomeData.innerHTML += `<span>${element}</span><br>`;
+        });
         // incomeArray.push(parseInt(itemAmount.value));
     }
 
     else if (selectedValue == 'expense') {
-        expenseData.innerHTML += `<div>
-        <span>${itemDescription.value}</span>
-        <span>${itemAmount.value}€</span>
-        </div>`;
-        console.log('expense');
+        accountBalance.expenses.description.push(itemDescription.value);
+        accountBalance.expenses.amount.push(parseInt(itemAmount.value));
+
+
+        expenseData.innerHTML = '';
+        showAccount.expenses.amount.forEach(element => {
+            expenseData.innerHTML += `<span>${element}</span><br>`;
+        });
     }
     else {
         console.log('select either income or expense');
 
     }
-}
-
-function checkBalance() {
 
 
 }
 
 
+
+function storeDataInLocal() {
+
+}
+// function checkBalance() {
+
+
+// }
 
 // action listener 
-addButton.addEventListener('click', function (e){
+addButton.addEventListener('click', function (e) {
+    let stringifiedAccountBalance = JSON.stringify(accountBalance, undefined, 2);
+    localStorage.setItem('accountBalance', stringifiedAccountBalance);
     isValidated = true;
-    if(isValidated){
+    if (isValidated) {
         createContent();
     }
 });
+
+createContent();
+
+
+
