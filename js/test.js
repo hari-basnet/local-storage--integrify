@@ -7,7 +7,9 @@ const incomeBox = document.querySelector('.income-box');
 const incomeData = document.querySelector('.income-data')
 const expenseData = document.querySelector('.expense-data')
 const sectionBalance = document.querySelector('.section-balance');
+const incomeArray = []
 
+const expenseArray = []
 
 const accountBalance = {
     name: 'Koray',
@@ -34,18 +36,17 @@ const accountBalance = {
             amount: 500,
             time: displayDateTime()
         }
-], 
-        addIncome: function (description, amount) {
-        
-        const retreivedFromLocal = JSON.parse(localStorage.getItem('incomes'));
-        let time = displayDateTime();
-        this.incomes.push({description, amount, time});
-        retreivedFromLocal.push({description, amount, time});
-        localStorage.setItem('incomes', JSON.stringify(retreivedFromLocal, undefined, 4));
-        console.log(retreivedFromLocal);
+], addIncome: function (description, amount) {
+        // let json = localStorage.getItem('incomes')
+        // const retreivedFromLocal = JSON.parse(json);
+        // let time = displayDateTime();
+        // this.incomes.push({description, amount, time});
+        // retreivedFromLocal.push({description, amount, time});
+        // localStorage.setItem('incomes', retreivedFromLocal)
+        // console.log(retreivedFromLocal);
 
         
-    },
+    }, 
     addExpense: function (description, amount) {
         let time = displayDateTime();
         this.incomes.push({description, amount, time});
@@ -73,11 +74,11 @@ const accountBalance = {
     },
 }
 
-localStorage.setItem('incomes', JSON.stringify(accountBalance.incomes, undefined, 2));
-localStorage.setItem('expenses', JSON.stringify(accountBalance.expenses, undefined, 2));
+// localStorage.setItem('incomes', JSON.stringify(accountBalance.incomes, undefined, 2));
+// localStorage.setItem('expenses', JSON.stringify(accountBalance.expenses, undefined, 2));
 
-console.log(accountBalance.totalIncome());
-console.log(accountBalance.totalExpense());
+// console.log(accountBalance.totalIncome());
+// console.log(accountBalance.totalExpense());
 // function setToLocal(){
 //     let stringifiedAccount = JSON.stringify(accountBalance, undefined, 2);
 //     localStorage.setItem('accountBalance', stringifiedAccount);
@@ -172,7 +173,7 @@ function displayDateTime(){
         mm = "0" + mm;
     }
 
-    var setDate = `${dd}/${mm}/${yyyy} ${hrs}:${min} `;
+    var setDate = `The date is ${dd}/${mm}/${yyyy} ${hrs}:${min} `;
     
     return setDate;
 }
