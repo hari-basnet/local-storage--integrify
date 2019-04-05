@@ -12,73 +12,72 @@ const incomeArray = []
 const expenseArray = []
 
 const accountBalance = {
-   name: 'Koray',
-   lastName: 'Dündar',
-   income: {
-       description:[],
-       amount:[]
-   },
-   expense:{
-       description:[],
-       amount:[]
-   },
-   balance: 0
+    name: 'Koray',
+    lastName: 'Dündar',
+    income: {
+        description: [],
+        amount: []
+    },
+    expense: {
+        description: [],
+        amount: []
+    }
 }
 
-addButton.addEventListener('click', function (){
 
-       let selectedValue = select.options[select.selectedIndex].value
-       // console.log(selectedValue)
 
-       if (selectedValue === 'income'){
-           accountBalance.income.description.push(itemDescription.value)
-           accountBalance.income.amount.push(parseInt(itemAmount.value))
-
-           incomeData.innerHTML += `<div>
-       <span>${itemDescription.value}</span>
-       <span>${itemAmount.value}€</span>
-       </div>`;
-
-       } else if (selectedValue === 'expense'){
-           accountBalance.expense.description.push(itemDescription.value)
-           accountBalance.expense.amount.push(parseInt(itemAmount.value))
-
-           expenseData.innerHTML += `<div>
-       <span>${itemDescription.value}</span>
-       <span>${itemAmount.value}€</span>
-       </div>`;
-
-       } else {
-           console.log('Please select an option')
-
-       }
-
+addButton.addEventListener('click', function () {
+    createContent();
+    // checkBalance();       
 })
 
-addButton.addEventListener('click', checkBalance)
+function createContent() {
 
-function checkBalance () {
-    
-    let sumIncome = 0; 
-    let sumExpense= 0;
+    let selectedValue = select.options[select.selectedIndex].value;
+    // console.log(selectedValue)
+    if (selectedValue === 'income') {
+        accountBalance.income.description.push(itemDescription.value);
+        accountBalance.income.amount.push(parseInt(itemAmount.value));
 
-   accountBalance.income.amount.forEach(element => {
-       sumIncome += element
-   })
+        incomeData.innerHTML += `<div>
+            <span>${itemDescription.value}</span>
+            <span>${itemAmount.value}€</span>
+            </div>`;
 
-   accountBalance.expense.amount.forEach(element => {
-       sumExpense += element
-   })
+    } else if (selectedValue === 'expense') {
+        accountBalance.expense.description.push(itemDescription.value);
+        accountBalance.expense.amount.push(parseInt(itemAmount.value));
 
-   let balance = sumIncome - sumExpense
-   console.log(balance);
-   sectionBalance.innerHTML = `<span>Your current balance is: ${balance}€</span>`;
-   return balance
+        expenseData.innerHTML += `<div>
+            <span>${itemDescription.value}</span>
+            <span>${itemAmount.value}€</span>
+            </div>`;
 
-//    accountBalance.balance = accountBalance.income.amount - accountBalance.expense.amount
-//    console.log(accountBalance)
+    } else {
+        console.log('Please select an option')
+
+    }
+
+    let accountBalanceStringified = JSON.stringify(accountBalance, undefined, 2);
+    localStorage.setItem('accountBalance', accountBalanceStringified);
+
 }
 
+function checkBalance() {
 
+    let sumIncome = 0;
+    let sumExpense = 0;
 
+    accountBalance.income.amount.forEach(element => {
+        sumIncome += element;
+    });
 
+    accountBalance.expense.amount.forEach(element => {
+        sumExpense += element;
+    });
+
+    let balance = sumIncome - sumExpense
+    console.log(balance);
+    sectionBalance.innerHTML = `<span>Your current balance is: ${balance}€</span>`;
+    return balance;
+}

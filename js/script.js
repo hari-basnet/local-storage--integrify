@@ -65,6 +65,7 @@ function createContent() {
 
 
 }
+createContent();
 
 
 
@@ -86,7 +87,7 @@ addButton.addEventListener('click', function (e) {
     }
 });
 
-createContent();
+
 
 
 
