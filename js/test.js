@@ -58,7 +58,9 @@ const accountBalance = {
     },
     totalIncome: function () {
         let sum = 0;
-        this.incomes.forEach(element => {
+        let dataIncome = JSON.parse(localStorage.getItem('incomes'));
+        console.log(dataIncome);
+        dataIncome.forEach(element => {
             sum = sum + element.amount;
 
         });
@@ -66,7 +68,8 @@ const accountBalance = {
     },
     totalExpense: function () {
         let sum = 0;
-        this.expenses.forEach(element => {
+        let dataExpense = JSON.parse(localStorage.getItem('expenses'));
+        dataExpense.forEach(element => {
             sum = sum + element.amount;
 
         });
@@ -74,7 +77,8 @@ const accountBalance = {
     },
     calculateBalance: function () {
         let balance = this.totalIncome() - this.totalExpense();
-        return balance;
+
+        return sectionBalance.textContent = `Your current balance is: ${balance}`;
     },
 
     getIncomeData: function () {
@@ -122,32 +126,32 @@ addButton.addEventListener('click', function () {
         console.log('Please select an option');
     }
 
-    accountBalance.calculateBalance();
     accountBalance.getIncomeData();
     accountBalance.getExpenseData();
+    accountBalance.calculateBalance();
     clearFields();
 })
 
 
 function displayDateTime() {
     var myDate = new Date();
-
+    
     var dd = myDate.getDate();
     var mm = myDate.getMonth() + 1;
     var yyyy = myDate.getFullYear();
     var hrs = myDate.getHours();
     var min = myDate.getMinutes();
-
+    
     if (dd < 10) {
         dd = "0" + dd;
     }
-
+    
     if (mm < 10) {
         mm = "0" + mm;
     }
-
+    
     var setDate = `${dd}/${mm}/${yyyy} ${hrs}:${min} `;
-
+    
     return setDate;
 }
 
@@ -155,7 +159,7 @@ function clearFields (){
     itemDescription.value = '';
     itemAmount.value = '';
     select.value = 'select';
-
+    
 }
 // check of the local storage is empty or not 
 if (localStorage.length === 0 || localStorage.length == null){
@@ -164,5 +168,7 @@ if (localStorage.length === 0 || localStorage.length == null){
 }else{
     accountBalance.getIncomeData();
     accountBalance.getExpenseData(); 
+    accountBalance.calculateBalance();
+
 }
 
