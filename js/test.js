@@ -79,10 +79,9 @@ const accountBalance = {
 
     getIncomeData: function () {
         let dataIncome = JSON.parse(localStorage.getItem('incomes'));
-        let result;
         incomeData.innerHTML = '';
 
-        result = dataIncome.forEach(data => {
+        let result = dataIncome.forEach(data => {
             incomeData.innerHTML += `<div class="incomes"><p>${data.description}</p><br>
                 <p>${data.amount}</p><br><p>${data.time}</p><br></div>`;
         })
@@ -94,7 +93,6 @@ const accountBalance = {
 
         let dataExpense = JSON.parse(localStorage.getItem('expenses'));
 
-
         expenseData.innerHTML = '';
 
         let result = dataExpense.forEach(data => {
@@ -103,7 +101,6 @@ const accountBalance = {
         })
 
         return result;
-
     }
 }
 
@@ -128,6 +125,7 @@ addButton.addEventListener('click', function () {
     accountBalance.calculateBalance();
     accountBalance.getIncomeData();
     accountBalance.getExpenseData();
+    clearFields();
 })
 
 
@@ -152,5 +150,19 @@ function displayDateTime() {
 
     return setDate;
 }
-accountBalance.getIncomeData();
-accountBalance.getExpenseData(); 
+
+function clearFields (){
+    itemDescription.value = '';
+    itemAmount.value = '';
+    select.value = 'select';
+
+}
+// check of the local storage is empty or not 
+if (localStorage.length === 0 || localStorage.length == null){
+    localStorage.setItem('expenses', JSON.stringify(accountBalance.expenses, undefined, 2));
+    localStorage.setItem('incomes', JSON.stringify(accountBalance.incomes, undefined, 2));
+}else{
+    accountBalance.getIncomeData();
+    accountBalance.getExpenseData(); 
+}
+
