@@ -67,3 +67,8 @@ main{
     border: 2px solid maroon;
     margin: 5px auto;
 }
+
+.incomes{
+    display: flex;
+    justify-content: space-between;
+}
