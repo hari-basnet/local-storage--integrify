@@ -8,6 +8,8 @@ const incomeData = document.querySelector('.income-data')
 const expenseData = document.querySelector('.expense-data')
 const sectionBalance = document.querySelector('.section-balance');
 
+
+
 const accountBalance = {
     name: 'Koray',
     lastName: 'Dündar',
@@ -37,9 +39,11 @@ const accountBalance = {
 
         let time = displayDateTime();
 
+        // pushing to the object
         this.incomes.push({ description, amount, time });
 
-
+        // getting the object from the localstorage and adding user input 
+        //and setting it back to local storage
         let json = localStorage.getItem('incomes');
         const retreivedFromLocal = JSON.parse(json);
         retreivedFromLocal.push({ description, amount, time });
@@ -89,7 +93,6 @@ const accountBalance = {
             incomeData.innerHTML += `<div class="incomes"><p>${data.description}</p><br>
                 <p>${data.amount}</p><br><p>${data.time}</p><br></div>`;
         })
-
         return result;
 
     },
@@ -111,6 +114,7 @@ const accountBalance = {
 // localStorage.setItem('incomes', JSON.stringify(accountBalance.incomes, undefined, 2));
 // localStorage.setItem('expenses', JSON.stringify(accountBalance.expenses, undefined, 2));
 
+// delete button
 
 
 addButton.addEventListener('click', function () {
