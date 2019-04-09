@@ -67,7 +67,13 @@ main{
     margin: 5px auto;
 }
 
+.income-data,
+.expense-data{
+    padding: 0 10px;
+}
+
 .incomes{
     display: flex;
     justify-content: space-between;
 }
+
