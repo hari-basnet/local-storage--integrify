@@ -8,8 +8,6 @@ const incomeData = document.querySelector('.income-data')
 const expenseData = document.querySelector('.expense-data')
 const sectionBalance = document.querySelector('.section-balance');
 
-
-
 const accountBalance = {
     name: 'Koray',
     lastName: 'Dündar',
@@ -35,10 +33,10 @@ const accountBalance = {
             amount: 500,
             time: displayDateTime()
         }
-    ], addIncome: function (description, amount) {
+    ],
+    addIncome: function (description, amount) {
 
         let time = displayDateTime();
-
         // pushing to the object
         this.incomes.push({ description, amount, time });
 
@@ -66,7 +64,6 @@ const accountBalance = {
         console.log(dataIncome);
         dataIncome.forEach(element => {
             sum = sum + element.amount;
-
         });
         return sum;
     },
@@ -75,7 +72,6 @@ const accountBalance = {
         let dataExpense = JSON.parse(localStorage.getItem('expenses'));
         dataExpense.forEach(element => {
             sum = sum + element.amount;
-
         });
         return sum;
     },
@@ -106,16 +102,9 @@ const accountBalance = {
             expenseData.innerHTML += `<div class="incomes"><p>${data.description}</p><br>
                 <p>${data.amount}</p><br><p>${data.time}</p><br></div>`;
         })
-
         return result;
     }
 }
-
-// localStorage.setItem('incomes', JSON.stringify(accountBalance.incomes, undefined, 2));
-// localStorage.setItem('expenses', JSON.stringify(accountBalance.expenses, undefined, 2));
-
-// delete button
-
 
 addButton.addEventListener('click', function () {
 
@@ -123,55 +112,47 @@ addButton.addEventListener('click', function () {
 
     if (selectedValue === 'income') {
         accountBalance.addIncome(itemDescription.value, parseInt(itemAmount.value));
-
     } else if (selectedValue === 'expense') {
         accountBalance.addExpense(itemDescription.value, parseInt(itemAmount.value));
     } else {
         console.log('Please select an option');
     }
-
     accountBalance.getIncomeData();
     accountBalance.getExpenseData();
     accountBalance.calculateBalance();
     clearFields();
 })
 
-
 function displayDateTime() {
     var myDate = new Date();
-    
+
     var dd = myDate.getDate();
     var mm = myDate.getMonth() + 1;
     var yyyy = myDate.getFullYear();
     var hrs = myDate.getHours();
     var min = myDate.getMinutes();
-    
-    if (dd < 10) {
-        dd = "0" + dd;
-    }
-    
-    if (mm < 10) {
-        mm = "0" + mm;
-    }
-    
+
+    if (hrs < 10) { hrs = "0" + hrs; }
+    if (min < 10) { min = "0" + min; }
+    if (dd < 10) { dd = "0" + dd; }
+    if (mm < 10) { mm = "0" + mm; }
     var setDate = `${dd}/${mm}/${yyyy} ${hrs}:${min} `;
-    
+
     return setDate;
 }
 
-function clearFields (){
+function clearFields() {
     itemDescription.value = '';
     itemAmount.value = '';
     select.value = 'select';
-    
 }
 // check of the local storage is empty or not 
-if (localStorage.length === 0 || localStorage.length == null){
+if (localStorage.length === 0 || localStorage.length == null) {
     localStorage.setItem('expenses', JSON.stringify(accountBalance.expenses, undefined, 2));
     localStorage.setItem('incomes', JSON.stringify(accountBalance.incomes, undefined, 2));
-}else{
+} else {
     accountBalance.getIncomeData();
-    accountBalance.getExpenseData(); 
+    accountBalance.getExpenseData();
     accountBalance.calculateBalance();
 
 }

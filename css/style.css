@@ -27,17 +27,14 @@ main{
     padding: 20px 0;
 }
 
-#description{
-    width: 200px;
-    padding: 2px 0;
+#description, 
+#amount {
+    width: 250px;
+    padding: 4px 0;
     outline: none;
-}
-
-#amount{
-    width: 200px;
-    padding: 2px 0;
+    border-radius: 5px;
+    font-size: 90%;
     outline: none;
-
 }
 
 .btn-add{
