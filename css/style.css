@@ -30,7 +30,7 @@ main{
 #description, 
 #amount {
     width: 250px;
-    padding: 4px 0;
+    padding: 4px 4px;
     outline: none;
     border-radius: 5px;
     font-size: 90%;
